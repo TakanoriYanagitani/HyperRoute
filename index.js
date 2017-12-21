@@ -45,6 +45,7 @@
       const cached = localStorage.getItem(url);
       new Promise(sourceConsumer => {
         if(cached) return sourceConsumer(cached);
+        alert(url);
         getTextAsync(url).then(sourceConsumer);
       })
       .then(source => {
