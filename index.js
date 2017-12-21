@@ -26,7 +26,7 @@
     if(! iterator)      return iterated();
     if(! iterator.next) return iterated();
     if(! consumerAsync) return iterated();
-    const loop = {
+    const loop = () => {
       const next = iterator.next();
       if(! next)    return iterated();
       if(next.done) return iterated();
