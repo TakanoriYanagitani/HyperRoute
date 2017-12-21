@@ -48,6 +48,7 @@
         getTextAsync(url).then(sourceConsumer);
       })
       .then(source => {
+        alert(url);
         localStorage.setItem(url, source || "");
         (new Function(source || ""))();
         iterated();
