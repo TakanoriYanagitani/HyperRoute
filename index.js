@@ -40,16 +40,14 @@
       "https://unpkg.com/react@16/umd/react.development.js",
       "https://unpkg.com/react-dom@16/umd/react-dom.development.js",
       "https://unpkg.com/babel-standalone@6.15.0/babel.min.js",
-    ],
+    ][Symbol.iterator](),
     url => new Promise(iterated => {
       const cached = localStorage.getItem(url);
       new Promise(sourceConsumer => {
         if(cached) return sourceConsumer(cached);
-        alert(url);
         getTextAsync(url).then(sourceConsumer);
       })
       .then(source => {
-        alert(url);
         localStorage.setItem(url, source || "");
         (new Function(source || ""))();
         iterated();
