@@ -15,6 +15,13 @@
     request.send(data);
   });
   
+  const getTextAsync = url => requestAsync(url)
+    .then(request => {
+      const { responseText } = request || {};
+      return responseText;
+    })
+  ;
+  
   const iterateAsync = (iterator, consumerAsync) => new Promise(iterated => {
     if(! iterator)      return iterated();
     if(! iterator.next) return iterated();
@@ -28,7 +35,7 @@
     loop();
   });
   
-  iteratorAsync(
+  iterateAsync(
     [
       "https://unpkg.com/react@16/umd/react.development.js",
       "https://unpkg.com/react-dom@16/umd/react-dom.development.js",
@@ -38,9 +45,10 @@
       const cached = localStorage.getItem(url);
       new Promise(sourceConsumer => {
         if(cached) return sourceConsumer(cached);
+        getTextAsync(url).then(sourceConsumer);
       })
       .then(source => {
-        (new Function(source))();
+        (new Function(source || ""))();
         iterated();
       });
     })
