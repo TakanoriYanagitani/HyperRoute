@@ -9,6 +9,7 @@
         status,
       } = request || {};
       if(4 != readyState) return;
+      alert(status);
       if(200 != status) return;
       requestConsumer(request);
     }, false);
